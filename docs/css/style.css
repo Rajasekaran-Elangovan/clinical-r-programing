@@ -1,64 +1,244 @@
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f6f8;
-      margin: 0;
-      padding: 0;
-    }
-    /* Header */
+/* =========================================================
+   RESET
+   ========================================================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* =========================================================
+   BASE / GLOBAL
+   ========================================================= */
+html {
+  min-height: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+    Roboto, Helvetica, Arial, sans-serif;
+  color: #1d1d1f;
+  line-height: 1.6;
+
+  /* Global Apple-style gradient */
+  background: linear-gradient(
+    180deg,
+    #f5f6fb 0%,
+    #ffffff 35%,
+    #f5f5f7 100%
+  );
+}
+
+a {
+  color: #0366d6;
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* =========================================================
+   TYPOGRAPHY
+   ========================================================= */
+h1 {
+  color: #1d1d1f;
+}
+
+h2 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: #1d1d1f;
+  margin-bottom: 1rem;
+}
+
+p {
+  color: #424245;
+}
+
+/* =========================================================
+   HEADER (YOUR FINAL DESIGN)
+   ========================================================= */
 header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+
   background: linear-gradient(
     135deg,
     #dedef2 0%,
     #ffffff 40%,
     #e8e8ed 100%
   );
+  background-size: 200% 200%;
+
   padding: 2.5rem 1rem;
   text-align: center;
-  border-bottom: 1px solid #d2d2d7;
+
+  border-bottom: 1px solid rgba(210, 210, 215, 0.6);
+
   backdrop-filter: saturate(180%) blur(20px);
   -webkit-backdrop-filter: saturate(180%) blur(20px);
+
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+
+  transition:
+    padding 0.4s ease,
+    box-shadow 0.4s ease;
+
+  animation: headerGradientShift 18s ease infinite;
 }
 
-/* Header title */
 header h1 {
-  font-size: 2.5rem;
+  font-size: 2.8rem;
   font-weight: 600;
-  color: #1d1d1f;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.6rem;
+
+  transition:
+    opacity 0.3s ease,
+    transform 0.3s ease,
+    max-height 0.35s ease,
+    margin 0.35s ease;
 }
 
-/* Header subtitle */
 header p {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   color: #6e6e73;
   max-width: 720px;
   margin: 0 auto;
+
+  transition:
+    opacity 0.35s ease,
+    transform 0.35s ease,
+    font-size 0.35s ease;
 }
+/* =========================================================
+   HEADER SCROLL STATE (CSS-ONLY)
+   ========================================================= */
+
+body.scrolled header {
+  padding: 0.6rem 1rem; /* ~25% height */
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+/* Hide H1 on scroll */
+body.scrolled header h1 {
+  opacity: 0;
+  transform: translateY(-8px);
+  max-height: 0;
+  margin: 0;
+  overflow: hidden;
+}
+
+/* Keep subtitle visible with fade */
+body.scrolled header p {
+  opacity: 1;
+  font-size: 1.75rem;          /* slight increase */
+  font-weight: 600;
+  color: #1d1d1f;
+
+  text-align: left;
+  margin: 0;
+  padding-left: 1.5rem;
+
+  transform: translateY(0);
+}
+
+
+header::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -18px;
+  height: 18px;
+  background: linear-gradient(
+    to bottom,
+    rgba(255, 255, 255, 0.6),
+    rgba(255, 255, 255, 0)
+  );
+  pointer-events: none;
+}
+
+/* =========================================================
+   MAIN CONTENT
+   ========================================================= */
 main {
-      max-width: 900px;
-      margin: 2rem auto;
-      padding: 2rem;
-      background: white;
-      border-radius: 8px;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-    }
-    h1 {
-      color: #17b1b9;
-    }
-    h2 {
-      color: #0a5ab4;
-    }
-    footer {
-      text-align: center;
-      padding: 1rem;
-      color: #666;
-      font-size: 0.9rem;
-    }
-    a {
-      color: #0366d6;
-      text-decoration: none;
-    }
-    a:hover {
-      text-decoration: underline;
-    }
+  max-width: 900px;
+  margin: 3rem auto;
+  padding: 2.5rem;
+
+  /* Translucent surface */
+  background: rgba(255, 255, 255, 0.65);
+  border-radius: 18px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+
+  backdrop-filter: saturate(180%) blur(18px);
+  -webkit-backdrop-filter: saturate(180%) blur(18px);
+}
+
+
+/* =========================================================
+   SECTIONS
+   ========================================================= */
+.section {
+  max-width: 900px;
+  margin: 4rem auto;
+  padding: 0 1.5rem;
+}
+
+.section p {
+  font-size: 1.1rem;
+  max-width: 720px;
+}
+
+/* =========================================================
+   CARDS
+   ========================================================= */
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.card {
+  display: block;
+  padding: 2rem;
+  border-radius: 18px;
+
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95),
+    rgba(245, 245, 247, 0.95)
+  );
+
+  color: inherit;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+}
+
+.card p {
+  color: #6e6e73;
+}
+
+.card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* =========================================================
+   FOOTER
+   ========================================================= */
+footer {
+  margin-top: 5rem;
+  text-align: center;
+  padding: 2.5rem 1rem;
+  border-top: 1px solid #d2d2d7;
+  color: #6e6e73;
+  font-size: 0.95rem;
+}
