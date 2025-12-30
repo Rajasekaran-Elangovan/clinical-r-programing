@@ -66,7 +66,8 @@ header {
 
   background: linear-gradient(
     135deg,
-    #dedef2 0%,
+   /* #dedef2 0%,*/
+   #c0d4ddf2,
     #ffffff 40%,
     #e8e8ed 100%
   );
@@ -232,7 +233,7 @@ main {
   background: linear-gradient(
     135deg,
      rgba(255, 255, 255, 0.95),
-    #c0d4ddf2
+    rgba(192, 212, 221, 0.949)
   );
 }
 
